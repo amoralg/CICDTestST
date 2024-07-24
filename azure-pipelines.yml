@@ -5,11 +5,8 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-- task: PythonScript@0
-  inputs:
-    scriptSource: inline
-    script: |
-      print('Hola')
+  - bash: |
+      python -V
 
 - task: PythonScript@0
   inputs:
