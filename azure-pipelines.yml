@@ -8,7 +8,10 @@ steps:
 - task: PythonScript@0
   inputs:
     scriptSource: inline
-    script: pip install -r requirements.txt
+    script: |
+      import sys
+      print(sys.version)
+      print("Hola, como estas ? ")
 
 - task: PythonScript@0
   inputs:
