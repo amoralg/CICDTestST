@@ -5,20 +5,9 @@ pool:
   name: 'MyAgent'
 
 steps:
-  - powershell: |
-      python -V
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
       script: |
-        # Write your PowerShell commands here.
-        
         Write-Host "Hello World"
-
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-       # Write your commands here
-      
-        echo 'Hello world'
+        python hello.py
