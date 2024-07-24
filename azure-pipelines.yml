@@ -20,7 +20,7 @@ steps:
     testResultsFiles: '**/test-results/*.xml'
     testRunTitle: 'Python Unit Tests'
 
-  - script: |
-      python hello.py
-    displayName: 'Ejecutar script Python'
+ # - script: |
+  #    python hello.py
+   # displayName: 'Ejecutar script Python'
 
