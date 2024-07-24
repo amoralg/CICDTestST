@@ -2,7 +2,7 @@ trigger:
   - main 
 
 pool:
-  name: 'MyAgent'
+  vmImage: "ubuntu-latest"
 
 steps:
 - task: PythonScript@0
