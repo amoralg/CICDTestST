@@ -9,8 +9,7 @@ steps:
   inputs:
     scriptSource: inline
     script: |
-      Bask@3
-      python3 -m import sys
+      pythonInterpreter: '/usr/bin/python3'
 
 - task: PythonScript@0
   inputs:
