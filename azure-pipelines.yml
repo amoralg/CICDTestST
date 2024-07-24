@@ -1,0 +1,15 @@
+trigger:
+  - main 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7'  
+
+  - script: |
+      python hello.py
+    displayName: 'Ejecutar script Python'
+
