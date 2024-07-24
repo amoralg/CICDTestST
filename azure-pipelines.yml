@@ -14,8 +14,6 @@ steps:
     scriptSource: inline
     script: |
       print('Hola, como estas ?')
-      import sys
-      print(sys.version)
 
 - task: PythonScript@0
   inputs:
