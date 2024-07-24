@@ -2,8 +2,7 @@ trigger:
   - main 
 
 pool:
-  Azure Pipelines: 'Hosted Agent'
-
+  name: 'MyAgent'
 steps:
 - task: PythonScript@0
   inputs:
