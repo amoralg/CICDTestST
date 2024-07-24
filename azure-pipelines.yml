@@ -4,6 +4,7 @@ trigger:
 pool:
   name: 'MyAgent'
 
+steps:
 - task: PythonScript@0
   inputs:
     scriptSource: inline
