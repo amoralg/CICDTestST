@@ -8,16 +8,16 @@ steps:
   - bash: |
       python -V
 
-- task: PythonScript@0
-  inputs:
-    scriptSource: inline
-    script: pytest
+#- task: PythonScript@0
+ # inputs:
+ #   scriptSource: inline
+ #   script: pytest
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: '**/test-results/*.xml'
-    testRunTitle: 'Python Unit Tests'
-
+# task: PublishTestResults@2
+ # inputs:
+ #   testResultsFiles: '**/test-results/*.xml'
+#    testRunTitle: 'Python Unit Tests'
+#
  # - script: |
   #    python hello.py
    # displayName: 'Ejecutar script Python'
