@@ -5,13 +5,17 @@ pool:
   name: 'MyAgent'
 
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.12.3'
+
 - task: PythonScript@0
   inputs:
     scriptSource: inline
     script: |
+      print('Hola, como estas ?')
       import sys
       print(sys.version)
-      print("Hola, como estas ? ")
 
 - task: PythonScript@0
   inputs:
