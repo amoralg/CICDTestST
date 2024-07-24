@@ -2,7 +2,7 @@ trigger:
   - main 
 
 pool:
-  vmImage: 'Azure Pipelines'
+  MyAgent: 'personal-agent'
 
 steps:
 - task: PythonScript@0
