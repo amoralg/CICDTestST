@@ -2,7 +2,7 @@ trigger:
   - main 
 
 pool:
-  vmImage: 'amorales'
+  vmImage: 'Azure Pipelines'
 
 steps:
 - task: PythonScript@0
