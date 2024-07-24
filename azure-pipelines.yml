@@ -2,8 +2,24 @@ trigger:
   - main 
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'Self-hosted'
 
+steps:
+- task: PythonScript@0
+  inputs:
+    scriptSource: inline
+    script: pip install -r requirements.txt
+
+- task: PythonScript@0
+  inputs:
+    scriptSource: inline
+    script: pytest
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/test-results/*.xml'
+    testRunTitle: 'Python Unit Tests'
+    
 steps:
   - task: UsePythonVersion@0
     inputs:
