@@ -5,10 +5,22 @@ pool:
   name: 'MyAgent'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: PythonScript@0
+  inputs:
+    scriptSource: inline
+    script: |
+      print('Hola')
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PythonScript@0
+  inputs:
+    scriptSource: inline
+    script: pytest
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/test-results/*.xml'
+    testRunTitle: 'Python Unit Tests'
+
+ # - script: |
+  #    python hello.py
+   # displayName: 'Ejecutar script Python'
