@@ -19,11 +19,6 @@ steps:
   inputs:
     testResultsFiles: '**/test-results/*.xml'
     testRunTitle: 'Python Unit Tests'
-    
-steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.7'  
 
   - script: |
       python hello.py
