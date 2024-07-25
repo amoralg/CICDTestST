@@ -10,9 +10,8 @@ steps:
 #    python3 -m venv linux
 #    source linux/bin/activate
 #    pip install flask
-- script: |
-    - task: AzureWebApp@1
-      inputs:
+- task: AzureWebApp@1
+  inputs:
         azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
         appType: 'webAppLinux'
         appName: 'test-smart-talent'
