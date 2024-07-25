@@ -5,9 +5,8 @@ pool:
   name: 'MyAgent'
 
 steps:
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        Write-Host "Hello World"
-        python hello.py
+- script: |
+    python --version
+    pip install flask
+- script: |
+    flask run
