@@ -7,6 +7,6 @@ pool:
 steps:
 - script: |
     python3 -V
-    pip install flas
+    pip install flask
 - script: |
     flask run
