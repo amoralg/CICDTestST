@@ -16,5 +16,5 @@ steps:
         appType: 'webAppLinux'
         appName: 'test-smart-talent'
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        runtimeStack: 'PYTHON|3.11'
+        runtimeStack: 'PYTHON|3.12'
         startUpCommand: 'flask run'
