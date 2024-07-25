@@ -7,9 +7,9 @@ pool:
 steps:
 - script: |
     python3 -V
-    python3 -m venv linux
-    source linux/bin/activate
-    pip install flask
+#    python3 -m venv linux
+#    source linux/bin/activate
+#    pip install flask
 - script: |
     - task: AzureWebApp@1
       inputs:
