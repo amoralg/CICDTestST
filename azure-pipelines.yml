@@ -26,14 +26,14 @@ steps:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copiar archivos de salida'
+  displayName: 'Copiar archivos'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publicar artefactos'
-  
+
 - task: AzureWebApp@1
   inputs:
         azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
