@@ -15,9 +15,17 @@ steps:
   displayName: 'Verificar instalación de Flask'
 
 - script: |
+    pip install -r requirements.txt
     python3 install pytest
-    pytest
-  displayName: 'Ejecutar pruebas'
+    coverage run -m pytest
+    coverage html
+  displayName: 'Ejecutar tests con Pytest y generar cobertura'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/coverage/html/coverage.xml'
+    testRunTitle: 'Pytest Results'
+  displayName: 'Publicar resultados de las pruebas'
 
 - task: CopyFiles@2
   inputs:
