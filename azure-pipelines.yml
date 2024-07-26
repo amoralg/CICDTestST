@@ -15,7 +15,7 @@ steps:
   displayName: 'Verificar instalación de Flask'
 
 - script: |
-    # Agregar aquí cualquier comando adicional, como ejecutar pruebas unitarias
+    python3 install pytest
     pytest
   displayName: 'Ejecutar pruebas'
 
