@@ -11,10 +11,6 @@ variables:
 steps:
 
 - script: |
-    pip install -r requirements.txt
-  displayName: 'Instalar dependencias'
-
-- script: |
     flask --app app --version
   displayName: 'Verificar instalación de Flask'
 
