@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: 'MyAgent'
+  VmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'  # Configura la versión de build (Debug, Release, etc.)
@@ -14,12 +14,6 @@ steps:
     flask --app app --version
   displayName: 'Verificar instalación de Flask'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: '**/coverage/html/coverage.xml'
-    testRunTitle: 'Pytest Results'
-  displayName: 'Publicar resultados de las pruebas'
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
@@ -27,26 +21,12 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copiar archivos de salida'
 
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
-    includeRootFolder: false
-    archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publicar artefactos'
 
-- task: DownloadBuildArtifacts@1
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'drop'
-    itemPattern: '**/*.zip'
-    downloadPath: '$(System.ArtifactsDirectory)'
 - task: AzureWebApp@1
   inputs:
         azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
