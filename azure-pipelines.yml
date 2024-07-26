@@ -32,7 +32,14 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publicar artefactos'
-  
+
+- task: DownloadBuildArtifacts@1
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'drop'
+    itemPattern: '**/*.zip'
+    downloadPath: '$(System.ArtifactsDirectory)'
 - task: AzureWebApp@1
   inputs:
         azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
