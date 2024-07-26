@@ -1,20 +1,42 @@
 trigger:
-  - main 
+- main
 
 pool:
   name: 'MyAgent'
 
+variables:
+  buildConfiguration: 'Release'  # Configura la versión de build (Debug, Release, etc.)
+  pythonVersion: '3.12'  # Especifica la versión de Python a utilizar
+
 steps:
-- script: |
-    python3 -V
-#    python3 -m venv linux
-#    source linux/bin/activate
-#    pip install flask
-- task: AzureWebApp@1
+- task: UsePythonVersion@0
   inputs:
-        azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
-        appType: 'webAppLinux'
-        appName: 'test-smart-talent'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        runtimeStack: 'PYTHON|3.12'
-        startUpCommand: 'flask run'
+    versionSpec: $(pythonVersion)
+  displayName: 'Usar versión de Python'
+
+- script: |
+    pip install -r requirements.txt
+  displayName: 'Instalar dependencias'
+
+- script: |
+    flask --app app --version
+  displayName: 'Verificar instalación de Flask'
+
+- script: |
+    # Agregar aquí cualquier comando adicional, como ejecutar pruebas unitarias
+    pytest
+  displayName: 'Ejecutar pruebas'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copiar archivos de salida'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+  displayName: 'Publicar artefactos'
+
