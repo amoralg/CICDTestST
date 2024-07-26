@@ -16,9 +16,8 @@ steps:
 
 - script: |
     python3 install pytest
-    coverage run -m pytest
-    coverage html
-  displayName: 'Ejecutar tests con Pytest y generar cobertura'
+    pytest .
+  displayName: 'Ejecutar tests con Pytest'
 
 - task: PublishTestResults@2
   inputs:
