@@ -14,12 +14,6 @@ steps:
     flask --app app --version
   displayName: 'Verificar instalación de Flask'
 
-- script: |
-    print("Continua")
-#    python3 install pytest
-#    pytest .
-  displayName: 'Ejecutar tests con Pytest'
-
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: '**/coverage/html/coverage.xml'
