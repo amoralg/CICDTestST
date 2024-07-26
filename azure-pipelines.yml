@@ -4,15 +4,22 @@ trigger:
 pool:
   VmImage: 'ubuntu-latest'
 
-variables:
-  buildConfiguration: 'Release'  # Configura la versión de build (Debug, Release, etc.)
-  pythonVersion: '3.12'  # Especifica la versión de Python a utilizar
-
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.9'
+
+- script: |
+    pip install -r requirements.txt
+  displayName: 'Instalar dependencias'
 
 - script: |
     flask --app app --version
   displayName: 'Verificar instalación de Flask'
+
+- script: |
+    pytest
+  displayName: 'Ejecutar pruebas unitarias'
 
 - task: CopyFiles@2
   inputs:
@@ -26,7 +33,7 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publicar artefactos'
-
+  
 - task: AzureWebApp@1
   inputs:
         azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
@@ -35,4 +42,3 @@ steps:
         package: '$(build.DefaultWorkingDirectory)/**/*.zip'
         runtimeStack: 'PYTHON|3.12'
         startUpCommand: 'flask run'
-
