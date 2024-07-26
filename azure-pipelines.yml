@@ -15,7 +15,6 @@ steps:
   displayName: 'Verificar instalación de Flask'
 
 - script: |
-    pip install -r requirements.txt
     python3 install pytest
     coverage run -m pytest
     coverage html
