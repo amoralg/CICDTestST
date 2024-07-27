@@ -2,43 +2,55 @@ trigger:
 - main
 
 pool:
-  VmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.9'
+    versionSpec: '3.x'
+  displayName: 'Use Python 3.x'
 
 - script: |
+    python -m pip install --upgrade pip
     pip install -r requirements.txt
-  displayName: 'Instalar dependencias'
+  displayName: 'Install dependencies'
+
+- script: "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -\nsudo apt-get install -y nodejs     \n"
+  displayName: 'Install Node.js'
+
+# Install dependency-check
+- script: |
+    repo="jhermann/dependency-check-py"
+    python3 -m pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
+    python3 -m pip install "https://github.com/$repo/archive/master.zip#egg=dependency-check"
+  displayName: 'Install dependency-check from source'
+
+# Run dependency-check
 
 - script: |
-    flask --app app --version
-  displayName: 'Verificar instalación de Flask'
+    dependency-check ./requirements.txt
+  displayName: 'Run dependency-check'
 
-- script: |
-    pytest
-  displayName: 'Ejecutar pruebas unitarias'
-
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copiar archivos'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive app files'
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-  displayName: 'Publicar artefactos'
+    targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
+    artifactName: 'app'
+  displayName: 'Publish app artifact'
 
 - task: AzureWebApp@1
   inputs:
-        azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
-        appType: 'webAppLinux'
-        appName: 'test-smart-talent'
-        package: '$(build.DefaultWorkingDirectory)/**/*.zip'
-        runtimeStack: 'PYTHON|3.12'
-        startUpCommand: 'flask run'
+    azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
+    appType: 'webAppLinux'
+    appName: 'test-smart-talent'
+    package: '$(Build.ArtifactStagingDirectory)/app.zip'
+    appSettings: '-SCM_DO_BUILD_DURING_DEPLOYMENT true'
+  displayName: 'Deploy to Azure Web App'
