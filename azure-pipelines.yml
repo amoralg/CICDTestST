@@ -32,7 +32,7 @@ steps:
   displayName: 'Run dependency-check'
 - script: |
       pytest --cov=.
-    displayName: 'Run tests'
+  displayName: 'Run tests'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
