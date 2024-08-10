@@ -33,26 +33,3 @@ steps:
 - script: |
       pytest --cov=.
   displayName: 'Run tests'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
-    replaceExistingArchive: true
-  displayName: 'Archive app files'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
-    artifactName: 'app'
-  displayName: 'Publish app artifact'
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Test(d0af34f1-2d64-40d1-aa0e-9712f463b918)'
-    appType: 'webAppLinux'
-    appName: 'test-smart-talent'
-    package: '$(Build.ArtifactStagingDirectory)/app.zip'
-    appSettings: '-SCM_DO_BUILD_DURING_DEPLOYMENT true'
-  displayName: 'Deploy to Azure Web App'
