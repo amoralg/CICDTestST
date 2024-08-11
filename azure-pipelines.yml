@@ -33,7 +33,7 @@ steps:
   steps:
   - script: |
     pip install -r requirements.txt
-    pytest-cov=.
+    pytest-cov
   displayName: 'Run test'
   displayName: 'Run dependency-check'
 - script: | 
