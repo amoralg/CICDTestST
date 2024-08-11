@@ -12,7 +12,7 @@ steps:
     customArguments: pytest
   displayName: 'Use Python 3.x'
 
-  - script: |
+- script: |
     echo "Hello World"
   displayName: 'Run a one-line script'
 
