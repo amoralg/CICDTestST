@@ -20,10 +20,14 @@ steps:
 
 # Install dependency-check
 - script: |
-    repo="jhermann/dependency-check-py"
-    python3 -m pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
-    python3 -m pip install "https://github.com/$repo/archive/master.zip#egg=dependency-check"
-  displayName: 'Install dependency-check from source'
+    echo "Verificando el PATH"
+    echo $PATH
+    echo "Instalando dependencias"
+    apt-get update
+    apt-get install -y jq
+    echo "Ejecutando comando"
+    jq --version
+  displayName: 'Verificar y ejecutar comandos'
 
 # Run dependency-check
 
