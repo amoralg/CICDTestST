@@ -12,6 +12,10 @@ steps:
     customArguments: pytest
   displayName: 'Use Python 3.x'
 
+  - script: |
+    echo "Hello World"
+  displayName: 'Run a one-line script'
+
 - script: |
    python -m pip list | grep pytest
     pip install -r requirements.txt
