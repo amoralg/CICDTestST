@@ -33,7 +33,8 @@ steps:
   steps:
   - script: |
     pip install -r requirements.txt
-    pytest
+    pytest--cov=.
+  displayName: 'Run test'
   displayName: 'Run dependency-check'
 - script: | 
 - task: ArchiveFiles@2
