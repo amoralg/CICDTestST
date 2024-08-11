@@ -8,10 +8,13 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
+    installToolsWithPip: true
+      customArguments: pytest
   displayName: 'Use Python 3.x'
 
 - script: |
-   sudo python -m pip install --upgrade pip
+   python -m pip list | grep pytest
+- script: /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/9143f17f-7ea6-4568-a612-8ad538845985.sh
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
@@ -30,7 +33,7 @@ steps:
     dependency-check ./requirements.txt
   displayName: 'Run dependency-check'
 - script: |
-    sudo pytest --cov=
+    pytest --cov=
   displayName: 'Run tests'
     
 - task: ArchiveFiles@2
