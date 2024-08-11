@@ -40,8 +40,8 @@ steps:
 - script: |
     pip install -r requirements.txt
   displayName: 'Run test'
-  steps:
   
+  steps:
 - script: | 
     echo "Hello World"
   displayName: 'Run dependency-check'
