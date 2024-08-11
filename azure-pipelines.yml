@@ -32,14 +32,16 @@ steps:
   displayName: 'Install dependency-check from source'
 
 # Run dependency-check
+
 - script: |
     dependency-check ./requirements.txt
-  steps:
-  - script: |
+  displayName: 'Run dependency-check'
+  
+- script: |
     pip install -r requirements.txt
   displayName: 'Run test'
   steps:
-  - script: | echo "Hello World"
+- script: | echo "Hello World"
   displayName: 'Run dependency-check'
 
 - task: ArchiveFiles@2
