@@ -31,7 +31,7 @@ steps:
     dependency-check ./requirements.txt
   displayName: 'Run dependency-check'
 - script: |
-    pytest--cov=.
+    pytest -cov=.
   displayName: 'Run test'
   
 - task: ArchiveFiles@2
