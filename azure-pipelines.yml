@@ -30,8 +30,8 @@ steps:
 # Run dependency-check
 - script: |
     dependency-check ./requirements.txt
- steps:
- - script: |
+  steps:
+  - script: |
     pip install -r requirements.txt
     pytest
   displayName: 'Run dependency-check'
