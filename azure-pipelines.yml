@@ -69,7 +69,6 @@ steps:
     appSettings: '-SCM_DO_BUILD_DURING_DEPLOYMENT true'
   displayName: 'Deploy to Azure Web App'
 
-steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: '**/test-results.xml'
