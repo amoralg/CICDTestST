@@ -38,6 +38,10 @@ steps:
   displayName: 'Run dependency-check'
   
 - script: |
+    pip install pytest
+   displayName: 'Run test'
+  
+- script: |
     pip install -r requirements.txt
   displayName: 'Run test'
   
